@@ -1,0 +1,31 @@
+{{#if user }}
+<nav id="sidebar" class="active">
+            <div class="sidebar-header">
+                <img src="/assets/img/tmp.png" alt="bootraper logo" class="app-logo">
+            </div>
+            <ul class="list-unstyled components text-secondary">
+           
+                <li>
+                    <a href="/controlenvases/"><i class="fas fa-home"></i>Inicio</a>
+                </li>
+                <li>
+                    <a href="/controlenvases/addarticle"><i class="fas fa-cart-plus"></i>Alta de Artículos</a>
+                </li>
+                <li>
+                    <a href="/controlenvases/addstore"><i class="fas fa-store"></i>Alta de Tiendas</a>
+                </li>
+            
+                {{{checkrol user.rol}}}
+                
+                <li>
+                    <a href="/controlenvases/addshake"><i class="fas fa-history"></i>Movimientos</a>
+                </li>
+                <li>
+                    <a href="/controlenvases/reportstocks"><i class="fas fa-file-pdf"></i>Reporte de Existencias</a>
+                </li>
+                <li>
+                    <a href="/controlenvases/reportshake"><i class="fas fa-file-pdf"></i>Reporte de Movimientos</a>
+                </li>
+            </ul>
+</nav>
+{{/if }}

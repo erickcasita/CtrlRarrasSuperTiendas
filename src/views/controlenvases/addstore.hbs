@@ -1,0 +1,292 @@
+<div class="card-body text-center">
+
+
+    <div class="modal fade" id="exampleModal" role="dialog" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Agregar una nueva tienda</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-start">
+                    <p>Todos los campos son requeridos.</p>
+                    <form action="/controlenvases/newstore" accept-charset="utf-8" method="POST">
+                        <div class="mb-3">
+                            <label for="zona" class="form-label">Zona:</label>
+                                <select name="zona" id="zona" class="form-select" required>
+                                        <option value="1">1.- Juan Diaz Covarrubias</option>
+                                        <option value="2">2.- Catemaco</option>
+                                        <option value="3">3.- Sihuapan</option>
+                                        <option value="4">4.- San Andres Tuxtla</option>
+                                       <option value="5">5.- Santiago Tuxtla</option>
+                               </select>
+                            
+                        </div>
+                        <div class="mb-3">
+                            <label for="nombretienda" class="form-label">Nombre Sucursal:</label>
+                             <input type="nombretienda" name="nombretienda" id="nombretienda" placeholder="Nombre indicador de la sucursal"
+                                        class="form-control" required>
+                            
+                        </div>
+                        <div class="mb-3">
+                            <label for="calle" class="form-label">calle:</label>
+                            <input type="calle" name="calle" id="calle" placeholder="Calle de la sucursal"
+                                        class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="numero" class="form-label">EXT:</label>
+                           <input type="numero" name="numero" id="numero" placeholder="Número ext o interior"
+                                        class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="colonia" class="form-label">Colonia:</label>
+                            <input type="colonia" name="colonia" id="colonia" placeholder="Colonia"
+                                        class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="localidad" class="form-label">Localidad:</label>
+                             <select name="localidad" id="localidad" class="form-select" required>
+                                        <option value="SAN ANDRES TUXTLA">SAN ANDRES TUXTLA</option>
+                                        <option value="SANTIAGO TUXTLA">SANTIAGO TUXTLA</option>
+                                        <option value="JUAN DIAZ COVARRUBIAS">JUAN DIAZ COVARRUBIAS</option>
+                                        <option value="CALERIA">CALERIA</option>
+                                        <option value="CATEMACO">CATEMACO</option>
+                                        <option value="COMOAPAN">COMOAPAN</option>
+                                        <option value="SIHUAPAN">SIHUAPAN</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="municipio" class="form-label">Municipio:</label>
+                             <select name="municipio" id="municipio" class="form-select" required>
+                                        <option value="SAN ANDRES TUXTLA">SAN ANDRES TUXTLA</option>
+                                        <option value="SANTIAGO TUXTLA">SANTIAGO TUXTLA</option>
+                                        <option value="HUEYAPAN DE OCAMPO">HUEYAPAN DE OCAMPO</option>
+                                        <option value="CATEMACO">CATEMACO</option>
+                    
+                                       
+                                      
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-primary">Agregar</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+
+<!-- MODAL PARA  EDITAR UNA STORE  !--->
+
+
+<div class="card-body text-center">
+
+
+    <div class="modal fade" id="editstoreModal" role="dialog" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar una tienda</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-start">
+                    <p>Todos los campos son requeridos.</p>
+                    <form action="/controlenvases/editarstore" accept-charset="utf-8" method="POST">
+                        <div class="mb-3">
+                            <label for="idstore" class="form-label">ID:</label>
+                            <input type="text" name="idstore" id="idstore" placeholder="ID de la tienda" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="zona" class="form-label">Zona:</label>
+                                <select name="zonaeditar" id="zonaeditar" class="form-select" required>
+                                        <option value="1">1.- Juan Diaz Covarrubias</option>
+                                        <option value="2">2.- Catemaco</option>
+                                        <option value="3">3.- Sihuapan</option>
+                                        <option value="4">4.- San Andres Tuxtla</option>
+                                       <option value="5">5.- Santiago Tuxtla</option>
+                               </select>
+                            
+                        </div>
+                        <div class="mb-3">
+                            <label for="nombretiendaeditar" class="form-label">Nombre Sucursal:</label>
+                             <input type="text" name="nombretiendaeditar" id="nombretiendaeditar" placeholder="Nombre indicador de la sucursal"
+                                        class="form-control" required>
+                            
+                        </div>
+                        <div class="mb-3">
+                            <label for="calleeditar" class="form-label">calle:</label>
+                            <input type="text" name="calleeditar" id="calleeditar" placeholder="Calle de la sucursal"
+                                        class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="numeroeditar" class="form-label">EXT:</label>
+                           <input type="numero" name="numeroeditar" id="numeroeditar" placeholder="Número ext o interior"
+                                        class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="coloniaeditar" class="form-label">Colonia:</label>
+                            <input type="text" name="coloniaeditar" id="coloniaeditar" placeholder="Colonia"
+                                        class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="localidadeditar" class="form-label">Localidad:</label>
+                             <select name="localidadeditar" id="localidadeditar" class="form-select" required>
+                                        <option value="SAN ANDRES TUXTLA">SAN ANDRES TUXTLA</option>
+                                        <option value="SANTIAGO TUXTLA">SANTIAGO TUXTLA</option>
+                                        <option value="JUAN DIAZ COVARRUBIAS">JUAN DIAZ COVARRUBIAS</option>
+                                        <option value="CALERIA">CALERIA</option>
+                                        <option value="CATEMACO">CATEMACO</option>
+                                        <option value="COMOAPAN">COMOAPAN</option>
+                                        <option value="SIHUAPAN">SIHUAPAN</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="municipioeditar" class="form-label">Municipio:</label>
+                             <select name="municipioeditar" id="municipioeditar" class="form-select" required>
+                                        <option value="SAN ANDRES TUXTLA">SAN ANDRES TUXTLA</option>
+                                        <option value="SANTIAGO TUXTLA">SANTIAGO TUXTLA</option>
+                                        <option value="HUEYAPAN DE OCAMPO">HUEYAPAN DE OCAMPO</option>
+                                        <option value="CATEMACO">CATEMACO</option>
+                    
+                                       
+                                      
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-warning">Editar</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+ <div class="content">
+                <div class="container">
+                    <div class="page-title">
+                        <h3>Tiendas</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12">
+                            <div class="card">
+                                <div class="card-header">Super Tiendas Rarras S.A DE C.V.</div>
+                                
+                                <div class="card-body">
+                                    <p class="card-title"></p>
+                                    <table class="table table-hover" id="data-tables-store" width="100%">
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Nuevo</button>
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Zona</th>
+                                                <th>Nombre Sucursal</th>
+                                                <th>Calle</th>
+                                                <th>EXT</th>
+                                                <th>Colonia</th>
+                                                <th>Localidad</th>
+                                                <th>Municipio</th>
+                                                <th></th>
+                                                
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                {{#each stores }}
+
+                                                <tr>
+                                
+                                                <td class="lettermen2" >{{idtienda}}</td>
+                                                <td class="lettermen2">{{zona}}</td>
+                                                <td class="lettermen">{{nombretienda}}</td>
+                                                <td class="lettermen">{{calle}}</td>
+                                                <td class="lettermen2">{{numero}}</td>
+                                                <td class="lettermen">{{colonia}}</td>
+                                                <td class="lettermen">{{localidad}}</td>
+                                                <td class="lettermen">{{municipio}}</td>
+                                               
+                                                <td class="text-end lettermen">{{{checktdrol ../user.rol}}}</td>
+                                              
+                                                
+                                                </tr>
+                                                {{/each}}
+                                                
+                                        </tbody>
+                                        </table>
+                                  
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+<script>
+
+    $(document).ready(function() {  
+        
+        $(document).on("click", ".editarModal", function(){		  
+
+
+           fila = $(this).closest("tr");	        
+           id = fila.find('td:eq(0)').text();
+           zona = fila.find('td:eq(1)').text();
+           nomsucursal = fila.find('td:eq(2)').text();
+           calle = fila.find('td:eq(3)').text();
+           ext = fila.find('td:eq(4)').text();
+           colonia = fila.find('td:eq(5)').text();
+           localidad = fila.find('td:eq(6)').text();
+           municipio = fila.find('td:eq(7)').text();    
+           $("#idstore").val(id);
+           $("#zonaeditar").val(zona);
+           $("#nombretiendaeditar").val(nomsucursal);
+           $("#calleeditar").val(calle);
+           $("#numeroeditar").val(ext);
+           $("#coloniaeditar").val(colonia);
+           $("#localidadeditar").val(localidad);
+           $("#municipioeditar").val(municipio);
+         
+           $('#editstoreModal').modal('show');	
+        });
+        $(document).on("click", ".deleteItem", function(){
+
+                fila = $(this).closest("tr");	        
+                id = fila.find('td:eq(0)').text();
+                nomsucursal = fila.find('td:eq(2)').text();
+               Swal.fire({
+                title: '¿Desea eliminar la tienda'+' '+nomsucursal+' con el ID'+' '+id+'?',
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: 'SI',
+                denyButtonText: `NO`,
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    //Swal.fire('Saved!', '', 'success')
+                    window.location.replace("/controlenvases/deletestore/"+id);
+                } else if (result.isDenied) {
+                    Swal.fire('Cambios no realizados', '', 'info')
+                }
+            })
+        
+        });
+
+
+    });
+
+
+ 
+</script>

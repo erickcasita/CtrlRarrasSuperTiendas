@@ -1,0 +1,81 @@
+{{#if success}}
+  <script>
+
+  Swal.fire({
+  title: '¡Exito!',
+  text: ' {{success}}',
+  icon: 'success',
+  confirmButtonText: 'Aceptar'
+})
+  </script>
+{{/if}}
+{{#if message}}
+  <script>
+
+  Swal.fire({
+  title: '¡Atención!',
+  text: ' {{message}}',
+  icon: 'info',
+  confirmButtonText: 'Aceptar'
+})
+  </script>
+{{/if}}
+{{#if error}}
+  <script>
+
+  Swal.fire({
+  title: '¡Error!',
+  text: ' {{error}}',
+  icon: 'error',
+  confirmButtonText: 'Aceptar'
+})
+  </script>
+{{/if}}
+{{#if showreporte}}
+  <script> 
+
+  
+      Swal.fire({
+                title: '¡Reporte Generado Correctamente! ¿Desea Mostrar el Reporte?',
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: 'SI',
+                denyButtonText: `NO`,
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    //Swal.fire('Saved!', '', 'success')
+                    window.open('/controlenvases/showreport', '_blank');
+                  
+                } else if (result.isDenied) {
+                    Swal.fire('Cambios no realizados', '', 'info')
+                }
+            })
+
+
+  </script>
+{{/if}}
+{{#if showreporteshake}}
+  <script> 
+
+  
+      Swal.fire({
+                title: '¡Reporte Generado Correctamente! ¿Desea Mostrar el Reporte?',
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: 'SI',
+                denyButtonText: `NO`,
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    //Swal.fire('Saved!', '', 'success')
+                    window.open('/controlenvases/showreportshake', '_blank');
+                  
+                } else if (result.isDenied) {
+                    Swal.fire('Cambios no realizados', '', 'info')
+                }
+            })
+
+
+  </script>
+{{/if}}

@@ -1,0 +1,106 @@
+<div class="content">
+    <div class="container">
+        <div class="page-title">
+            <h3>Movimientos</h3>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">Super Tiendas Rarras S.A DE C.V.</div>
+                    <div class="card-body">
+
+                        <form action="/controlenvases/newshake" accept-charset="utf-8" method="POST">
+                            <div class="mb-3">
+                                <label for="movimiento" class="form-label">Movimiento</label>
+                                <select name="movimiento" id="movimiento" class="form-select">
+                                    <option value="ENTRADA">ENTRADA</option>
+                                    <option value="SALIDA">SALIDA</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="tipomovimientoentrada" class="form-label" name="lbltipomovimientoentrada"
+                                    id="lbltipomovimientoentrada">Tipo de Movimiento</label>
+                                <select name="tipomovimientoentrada" id="tipomovimientoentrada" class="form-select">
+                                    <option value="DEVOLUCION DE CLIENTES">DEVOLUCION DE CLIENTES</option>
+                                    <option value="COMPRA PROVEEDOR">COMPRA PROVEEDOR</option>
+                                    <option value="PRESTAMO PROVEEDOR">PRESTAMO PROVEEDOR</option>
+                                    <option value="INVENTARIO INICIAL">INVENTARIO INICIAL</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="tipomovimientosalida" class="form-label" name="lbltipomovimientosalida"
+                                    id="lbltipomovimientosalida">Tipo de Movimiento</label>
+                                <select name="tipomovimientosalida" id="tipomovimientosalida" class="form-select">
+                                    <option value="SALIDA POR VENTA AL PUBLICO">SALIDA POR VENTA AL PUBLICO</option>
+                                    <option value="COMPRA PROVEEDOR">COMPRA PROVEEDOR</option>
+                                    <option value="PRESTAMO PROVEEDOR">ABONO PROVEEDOR</option>
+                                    <option value="SALIDA POR ABONO">SALIDA POR ABONO</option>
+                                </select>
+                            </div>
+                            <div class="row g-2">
+                                <div class="mb-3 col-md-6">
+                                    <label for="producto" class="form-label">Artículo</label>
+                                    <select name="producto" id="producto" class="form-select">
+                                        {{#each products}}
+
+                                        <option value="{{idproducto}}">{{idproducto}} {{descripcion}}</option>
+
+                                        {{/each}}
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 col-md-4">
+                                    <label for="cantidad" class="form-label">Cantidad</label>
+                                    <input type="number" name="cantidad" id="cantidad" class="form-control">
+                                </div>
+                                <div class="mb-3 col-md-2">
+                                    <label for="" class="form-label"> ⠀ </label>
+                                    <br>
+
+                                    <button type="button" class="btn btn-warning plus"><i
+                                            class="fas fa-plus-square"></i></button>
+                                </div>
+                            </div>
+
+                            <table class="table tbl-articulos" >
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Artículo</th>
+                                        <th scope="col">Cantidad</th>
+                                        <th scope="col">Eliminar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                   
+                               
+                                </tbody>
+                            </table>
+                           
+
+
+                            <br>
+
+                            <div class="mb-3">
+                                <label for="tienda" class="form-label">Sucursal:</label>
+                                <select name="tienda" id="tienda" class="form-select">
+                                    {{#each stores}}
+
+                                    <option value="{{idtienda}}">{{idtienda}} {{nombretienda}}</option>
+
+                                    {{/each}}
+                                </select>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+
+
+<script src="/assets/js/multiselect.js"></script

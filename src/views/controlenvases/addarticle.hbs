@@ -1,0 +1,193 @@
+<div class="card-body text-center">
+
+
+    <div class="modal fade" id="exampleModal" role="dialog" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Agregar un nuevo artículo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    
+                </div>
+                <div class="modal-body text-start">
+                    <p>Todos los campos son requeridos.</p>
+                    <form action="/controlenvases/newarticle" accept-charset="utf-8" method="POST">
+                        <div class="mb-3">
+                            <label for="tipoarticulo" class="form-label">Tipo Artículo:</label>
+                               <select name="tipoarticulo" id="tipoarticulo" class="form-select" required>
+                                        <option value="CERVEZA">CERVEZA</option>
+                                        <option value="REFRESCO">REFRESCO</option>
+                                       
+                               </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="tipoenvase" class="form-label">Tipo Envase:</label>
+                               <select name="tipoenvase" id="tipoenvase" class="form-select" required>
+                                        <option value="ENVASE VACIO">ENVASE VACIO</option>
+                                        <option value="ENVASE LLENO">ENVASE LLENO</option>
+                                       
+                               </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="descripcion" class="form-label">Descripción:</label>
+                            <textarea class="form-control" id="descripcion" name="descripcion" rows="1"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-primary">Agregar</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card-body text-center">
+
+
+    <div class="modal fade" id="editModal" role="dialog" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar un artículo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    
+                </div>
+                <div class="modal-body text-start">
+                    <p>Todos los campos son requeridos.</p>
+                    <form action="/controlenvases/editarticle" accept-charset="utf-8" method="POST">
+                         <div class="mb-3">
+                            <label for="ideditar" class="form-label">ID:</label>
+                                <input type="text" name="ideditar" id="ideditar"  class="form-control">
+                              
+                        </div>
+                        <div class="mb-3">
+                            <label for="tipoarticuloeditar" class="form-label">Tipo Artículo:</label>
+                               <select name="tipoarticuloeditar" id="tipoarticuloeditar" class="form-select" required>
+                                        <option value="CERVEZA">CERVEZA</option>
+                                        <option value="REFRESCO">REFRESCO</option>
+                                       
+                               </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="tipoenvaseeditar" class="form-label">Tipo Envase:</label>
+                               <select name="tipoenvaseeditar" id="tipoenvaseeditar" class="form-select" required>
+                                        <option value="ENVASE VACIO">ENVASE VACIO</option>
+                                        <option value="ENVASE LLENO">ENVASE LLENO</option>
+                                       
+                               </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="descripcioneditar" class="form-label">Descripción:</label>
+                            <textarea class="form-control" id="descripcioneditar" name="descripcioneditar" rows="1"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-warning">Editar</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+       
+ <div class="content">
+                <div class="container">
+                    <div class="page-title">
+                        <h3>Artículos</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12">
+                            <div class="card">
+                                <div class="card-header">Super Tiendas Rarras S.A DE C.V.</div>
+                                <div class="card-body">
+                                    <p class="card-title"></p>
+                                    <table class="table table-hover" id="dataTables-example" width="100%">
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Nuevo</button>
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Tipo Producto</th>
+                                                <th>Tipo Envase</th>
+                                                <th>Descripción</th>
+                                                <th></th>
+                                                    
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                               {{#each articles}}
+                                            
+                                                <tr>
+                                
+                                                <td data-order="">{{idproducto}}</td>
+                                                <td>{{tipoproducto}}</td>
+                                                <td>{{tipoenvase}}</td>
+                                                <td>{{descripcion}}</td>
+                                                <td class="text-end lettermen">{{{checktdrol ../user.rol}}}</td>
+                                                
+                                                </tr>
+                                            {{/each}}
+                                          
+                                       
+                                        </tbody>
+                                        </table>
+                                  
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </div>
+
+<script>
+
+    $(document).ready(function() {  
+        
+        $(document).on("click", ".editarModal", function(){		            
+           fila = $(this).closest("tr");	        
+           id = fila.find('td:eq(0)').text();
+           tproducto = fila.find('td:eq(1)').text();
+           tenvace = fila.find('td:eq(2)').text();
+           descripcion = fila.find('td:eq(3)').text();
+           $("#tipoarticuloeditar").val(tproducto);
+           $("#tipoenvaseeditar").val(tenvace);
+           $("#descripcioneditar").val(descripcion);
+           $("#ideditar").val(id);
+           $("#ideditar").prop( "disabled", false );
+           $('#editModal').modal('show');	
+        });
+        $(document).on("click", ".deleteItem", function(){
+
+                fila = $(this).closest("tr");	        
+                id = fila.find('td:eq(0)').text();
+                descripcion = fila.find('td:eq(3)').text();
+               Swal.fire({
+                title: '¿Desea eliminar el producto'+' '+descripcion+' con el ID'+' '+id+'?',
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: 'SI',
+                denyButtonText: `NO`,
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    //Swal.fire('Saved!', '', 'success')
+                    window.location.replace("/controlenvases/deletearticle/"+id);
+                } else if (result.isDenied) {
+                    Swal.fire('Cambios no realizados', '', 'info')
+                }
+            })
+        
+        });
+
+
+    });
+
+
+</script>
