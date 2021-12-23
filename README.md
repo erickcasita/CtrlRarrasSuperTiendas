@@ -3,7 +3,7 @@ Web system for the control and administration of containers of the company Rarra
 
 [![made-with-nodejs](https://img.shields.io/badge/Made%20with-nodejs-1f425f.svg)](https://nodejs.org/es/)[![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.png?v=103)](https://github.com/erickcasita/SoporteTecnicoCoronaSAT)[![GPL Licence](https://badges.frapsoft.com/os/gpl/gpl.png?v=103)](https://opensource.org/licenses/GPL-3.0/)
 
-![Interfaz del software](https://raw.githubusercontent.com/erickcasita/SoporteTecnicoCoronaSAT/master/screenshots/scrshot1.png)
+![Interfaz del software](https://raw.githubusercontent.com/erickcasita/CtrlRarrasSuperTiendas/master/screenshots/scrshot1.png)
 ## Installation
 Checkout the project from Github to a local folder
 
