@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
     //Funcion para ocultar los select segun el movimiento ENTRADA | SALIDA
     $('#tipomovimientosalida').hide();
