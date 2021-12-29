@@ -162,6 +162,7 @@ router.get('/deletearticle/:id',isLoggedIn, async (req, res) => {
         req.flash('success', '¡Artículo eliminado correctamente!');
         res.redirect('/controlenvases/addarticle');
     } catch (e) {
+       
         req.flash('error', '¡Este artículo no se puede eliminar por que esta en un almacen! ');
         res.redirect('/controlenvases/addarticle');
        
@@ -171,36 +172,36 @@ router.get('/deletearticle/:id',isLoggedIn, async (req, res) => {
 router.get('/deletestore/:id',isLoggedIn, async (req, res) => {
     let idstore = req.params.id;
     try {
-        const sql = await pool.query('DELETE FROM tiendas WHERE idtienda = ?',[idstore]);
+        const sql = await pool.query('DELETE FROM tiendas WHERE idtienda = ?', [idstore]);
         req.flash('success', 'Tienda eliminada correctamente!');
         res.redirect('/controlenvases/addstore');
     } catch (e) {
         console.log(e.sqlMessage);
         let coderror = e.code;
         let msgerror = e.sqlMessage;
-        let msg = msgerror + 'Código de error: '+ coderror;
+        let msg = msgerror + 'Código de error: ' + coderror;
         req.flash('error', msg);
         res.redirect('/controlenvases/addstore');
-       
-    } 
+
+    }
 });
-router.get('/deleteuser/:id',isLoggedIn, async (req, res) => {
+router.get('/deleteuser/:id', isLoggedIn, async (req, res) => {
     let iduser = req.params.id;
     try {
-        const sql = await pool.query('DELETE FROM usuarios WHERE id = ?',[iduser]);
+        const sql = await pool.query('DELETE FROM usuarios WHERE id = ?', [iduser]);
         req.flash('success', 'Usuario eliminado correctamente!');
         res.redirect('/controlenvases/adduser');
     } catch (e) {
         console.log(e.sqlMessage);
         let coderror = e.code;
         let msgerror = e.sqlMessage;
-        let msg = msgerror + 'Código de error: '+ coderror;
+        let msg = msgerror + 'Código de error: ' + coderror;
         req.flash('error', msg);
         res.redirect('/controlenvases/adduser');
-       
-    } 
+
+    }
 });
-router.post('/newstore',isLoggedIn, async (req, res) => {
+router.post('/newstore', isLoggedIn, async (req, res) => {
     const { zona, nombretienda, calle, numero, colonia, localidad, municipio } = req.body;
 
     //Obteniendo los datos para el idtiendas
@@ -233,82 +234,139 @@ router.post('/newstore',isLoggedIn, async (req, res) => {
     req.flash('success', 'Tienda agregada correctamente!');
     res.redirect('/controlenvases/addstore');
 });
-router.post('/newshake',isLoggedIn, async (req, res) => {
+router.post('/newshake', isLoggedIn, async (req, res) => {
     let tipomoviento;
     let arreglo = [];
     let cantidad = []
-    const { movimiento, tipomovimientoentrada, tipomovimientosalida,  tienda, tabla } = req.body;
+    const { movimiento, tipomovimientoentrada, tipomovimientosalida, tienda, tabla } = req.body;
     if (tipomovimientoentrada === undefined) {
         tipomoviento = tipomovimientosalida;
     } else {
         tipomoviento = tipomovimientoentrada;
     }
-    if(typeof tabla === 'string'){
+    if (typeof tabla === 'string') {
         arreglo.push(tabla);
-        
-    }else{
+
+    } else {
         arreglo = tabla;
     }
-    console.log(arreglo);
 
     arreglo.forEach(async element => {
         var arrayDeCadenas = element.split('$');
         const addalmacen = {
-           idtienda: tienda,
-           idproducto: arrayDeCadenas[0],
-           stock: arrayDeCadenas[1]
-       }
+            idtienda: tienda,
+            idproducto: arrayDeCadenas[0],
+            stock: arrayDeCadenas[1]
+        }
         if (movimiento === 'ENTRADA') {
             if (tipomoviento === 'INVENTARIO INICIAL') {
                 const sql = await pool.query('SELECT COUNT(*) as contar FROM almacen WHERE idproducto = ? AND idtienda = ?', [addalmacen.idproducto, tienda]);
                 if (Number(sql[0].contar) >= 1) {
                     try {
                         await pool.query('UPDATE almacen SET stock = ? WHERE idtienda = ? AND idproducto = ?', [addalmacen.stock, tienda, addalmacen.idproducto]);
+
                     } catch (e) {
-                        console.log(e);
+                        console.log(e.message);
                     }
 
                 } else {
 
-                    await pool.query('INSERT INTO almacen set ?', [addalmacen]);
+                    try {
+
+                        await pool.query('INSERT INTO almacen set ?', [addalmacen]);
+
+                    } catch (e) {
+                        console.log(e.message);
+                    }
+
                 }
 
-            }else{
-                const stock = await pool.query('SELECT stock FROM almacen WHERE idtienda = ? AND idproducto =  ?', [addalmacen.idtienda, addalmacen.idproducto]);
+            } else {
                 let suma = 0;
-                suma =  Number(stock[0].stock) + Number(addalmacen.stock);
-                console.log(suma);
-                await pool.query('UPDATE almacen SET stock = ? WHERE idtienda = ? and idproducto = ?' ,[suma,addalmacen.idtienda, addalmacen.idproducto]);
+
+                try {
+                    const stock = await pool.query('SELECT stock FROM almacen WHERE idtienda = ? AND idproducto =  ?', [addalmacen.idtienda, addalmacen.idproducto]);
+
+                    suma = Number(stock[0].stock) + Number(addalmacen.stock);
+
+                } catch (e) {
+
+
+                    console.log(e.message);
+
+                }
+
+                try {
+                    await pool.query('UPDATE almacen SET stock = ? WHERE idtienda = ? and idproducto = ?', [suma, addalmacen.idtienda, addalmacen.idproducto]);
+                } catch (e) {
+                    console.log(e.message);
+                }
+
+
             }
-        }else{
-            const stock = await pool.query('SELECT stock FROM almacen WHERE idtienda = ? AND idproducto =  ?', [addalmacen.idtienda, addalmacen.idproducto]);
+        } else {
             let suma = 0;
-            suma =   Number(stock[0].stock) - Number(addalmacen.stock);
-            console.log(suma);
-            await pool.query('UPDATE almacen SET stock = ? WHERE idtienda = ? and idproducto = ?' ,[suma,addalmacen.idtienda, addalmacen.idproducto]);
+            try {
+                const stock = await pool.query('SELECT stock FROM almacen WHERE idtienda = ? AND idproducto =  ?', [addalmacen.idtienda, addalmacen.idproducto]);
+                suma = Number(stock[0].stock) - Number(addalmacen.stock);
+
+            } catch (e) {
+                console.log(e.message);
+            }
+            try {
+                await pool.query('UPDATE almacen SET stock = ? WHERE idtienda = ? and idproducto = ?', [suma, addalmacen.idtienda, addalmacen.idproducto]);
+            } catch (e) {
+                console.log(e.message);
+            }
+
         }
-       
+
         //Obteniendo la fecha actual
         let date = new Date();
         let fecha = date.toISOString().split('T')[0];
-        const newShake ={ 
+        const newShake = {
             movimiento,
-            tipomovimiento:tipomoviento,
+            tipomovimiento: tipomoviento,
             idtienda: tienda,
             idproducto: arrayDeCadenas[0],
             cantidad: arrayDeCadenas[1],
             usuario: req.user.nomusuario,
             fecha
-    
+
         }
-        await pool.query('INSERT INTO movimientos SET ?', [newShake]);  
+
+        try {
+            await pool.query('INSERT INTO movimientos SET ?', [newShake]);
+
+
+        } catch (e) {
+            console.log(e.message);
+
+
+        }
     });
 
     req.flash('success', 'Movimiento realizado correctamente!');
     res.redirect('/controlenvases/addshake');
 
+});
+router.post('/validatearticles',isLoggedIn, async (req, res) => {
+    const{idproducto,idtienda} = req.body;
+    const stock = await pool.query('SELECT stock FROM almacen WHERE idtienda = ? AND idproducto =  ?', [idtienda, idproducto]);
+    let tmp,msg;
 
-
+    stock.forEach(element => {
+        tmp = element['stock'];
+       
+    });
+    if(tmp === undefined){
+       //salmacen para los productos que no estan
+        res.send('salmacen');
+    }else{
+        //almacen para los productos que si estan
+        res.send('almacen');
+    }
+  
 });
 router.post('/newreportstocks',isLoggedIn, async (req, res) => {
     //Recibiendo el ID de la sucursal y el tipo de envase 
