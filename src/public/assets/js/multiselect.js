@@ -23,32 +23,61 @@ $(document).ready(function () {
     //Funcion para agregar un elemento
     $(document).on("click", ".plus", function () {
 
-
-        if ($('#cantidad').val() === '' || $('#cantidad').val() === '0') {
+     
+        if ($('#cantidad').val() === '' || Number($('#cantidad').val()) <=0 ) {
             Swal.fire(
                 'Atención!',
                 'Ingrese una cantidad',
                 'info'
             )
         } else {
-            let cantidad = $('#cantidad').val();
-            let idproducto = $('#producto').val();
-            let producto = $('#producto option:selected').text();
-            let val = idproducto + "$" + cantidad;
-            let txt = producto + " = " + cantidad;
+            let bandera;
+            const values = {
+                idproducto: $('#producto').val(),
+                idtienda : $('#tienda').val()
 
-
-            //Validando row repetidos....
-
-            if (checkId(producto)) {
-                Swal.fire(
-                    'Atención!',
-                    'El artículo: ' + producto + " ya está en la lista",
-                    'info'
-                )
-            } else {
-                $('#tbl-articulos').append('<tr><td for="tbl" >' + producto + '<input type="hidden" name="tabla" value=' + val + ' /></td><td>' + cantidad + '</td><td><a href="#" class="btn btn-outline-danger btn-rounded  delete"><i class="fas fa-trash"></i></a></td></tr>');
             }
+            $.ajax({
+                method: 'POST',
+                url: '/controlenvases/validatearticles',
+                data: values,
+                success: function(result){
+                    if(!result){
+                        console.log('No hay respuesta en el server');
+                    } else {
+                        bandera = result;
+                        if (result == 'almacen') {
+                            let cantidad = $('#cantidad').val();
+                            let idproducto = $('#producto').val();
+                            let producto = $('#producto option:selected').text();
+                            let val = idproducto + "$" + cantidad;
+                            let txt = producto + " = " + cantidad;
+
+
+                            //Validando row repetidos....
+
+                            if (checkId(producto)) {
+                                Swal.fire(
+                                    'Atención!',
+                                    'El artículo: ' + producto + " ya está en la lista",
+                                    'info'
+                                )
+                            } else {
+                                $('#tbl-articulos').append('<tr><td for="tbl" >' + producto + '<input type="hidden" name="tabla" value=' + val + ' /></td><td>' + cantidad + '</td><td><a href="#" class="btn btn-outline-danger btn-rounded  delete"><i class="fas fa-trash"></i></a></td></tr>');
+                                $('#tienda').prop('disabled', true);
+                            }
+                        }else{
+                            Swal.fire(
+                                'Atención!',
+                                'El artículo: ' + $('#producto').val() + " No está en el almacen de la sucursal con el ID: "+$('#tienda').val() + ' Debe agregarlo como Inventario Inicial',
+                                'info'
+                            )
+                        }
+                    }
+                }
+            });
+          
+         
         }
 
     });
@@ -61,7 +90,13 @@ $(document).ready(function () {
     //Funcion para eliminar un articulo
     $(document).on("click", ".delete", function (event) {
         event.preventDefault();
+        var nFilas = $('#tbl-articulos  tr').length;
+        if(nFilas <=2){
+            $('#tienda').prop('disabled', false);
+        }
         $(this).closest("tr").remove();
     });
 
+
 });
+
