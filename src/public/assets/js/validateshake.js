@@ -13,7 +13,7 @@ $(document).ready(function(){
             return false;
         }
        
-       
+        $('#tienda').prop('disabled', false);  
     });
 
 
