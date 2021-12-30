@@ -133,8 +133,6 @@ router.post('/newarticle',isLoggedIn, async (req, res) => {
 });
 router.post('/editarticle',isLoggedIn, async (req, res) => {
     const { ideditar,tipoarticuloeditar,tipoenvaseeditar, descripcioneditar } = req.body;
-
-
     await pool.query('UPDATE productos SET tipoproducto = ?,tipoenvase = ?, descripcion = ? WHERE idproducto = ?',[tipoarticuloeditar,tipoenvaseeditar,descripcioneditar,ideditar]);
     req.flash('success', '¡Artículo editado correctamente!');
     res.redirect('/controlenvases/addarticle');

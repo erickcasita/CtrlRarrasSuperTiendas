@@ -7,6 +7,7 @@ const session = require('express-session');
 const passport = require('passport');
 const MySQLStore = require('express-mysql-session')(session);
 const {database} = require('./keys');
+const favicon = require('serve-favicon');
 //Initializations
 const app  = express();
 require('./lib/passport');
@@ -54,6 +55,7 @@ app.use('/controlenvases',require('./routes/controlenvases'));
 
 //Public
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(favicon(path.join(__dirname, 'public/assets/img', 'favicon.ico')))
 //Start the Server
 app.listen(app.get('port'), () => {
 

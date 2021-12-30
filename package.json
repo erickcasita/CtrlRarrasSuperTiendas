@@ -20,7 +20,8 @@
     "mysql": "^2.18.1",
     "passport": "^0.5.0",
     "passport-local": "^1.0.0",
-    "pdfmake": "^0.2.4"
+    "pdfmake": "^0.2.4",
+    "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
