@@ -31,7 +31,7 @@ $(document).ready(function () {
                 'info'
             )
         } else {
-            let bandera;
+            
             const values = {
                 idproducto: $('#producto').val(),
                 idtienda : $('#tienda').val()
@@ -45,10 +45,11 @@ $(document).ready(function () {
                     if(!result){
                         console.log('No hay respuesta en el server');
                     } else {
-                        bandera = result;
-                        if (result == 'almacen') {
+                        let opt = $('#tipomovimientoentrada option:selected').text()
+                    
+                        if (result == 'almacen' ||  opt == 'INVENTARIO INICIAL') {
                             let cantidad = $('#cantidad').val();
-                            let idproducto = $('#producto').val();
+                            let idproducto = $('#producto').val();  
                             let producto = $('#producto option:selected').text();
                             let val = idproducto + "$" + cantidad;
                             let txt = producto + " = " + cantidad;
@@ -65,6 +66,7 @@ $(document).ready(function () {
                             } else {
                                 $('#tbl-articulos').append('<tr><td for="tbl" >' + producto + '<input type="hidden" name="tabla" value=' + val + ' /></td><td>' + cantidad + '</td><td><a href="#" class="btn btn-outline-danger btn-rounded  delete"><i class="fas fa-trash"></i></a></td></tr>');
                                 $('#tienda').prop('disabled', true);
+                                $('#tipomovimientoentrada').prop('disabled', true);
                             }
                         }else{
                             Swal.fire(
@@ -93,6 +95,7 @@ $(document).ready(function () {
         var nFilas = $('#tbl-articulos  tr').length;
         if(nFilas <=2){
             $('#tienda').prop('disabled', false);
+            $('#tipomovimientoentrada').prop('disabled', false);  
         }
         $(this).closest("tr").remove();
     });
