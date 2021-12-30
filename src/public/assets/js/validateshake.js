@@ -13,7 +13,8 @@ $(document).ready(function(){
             return false;
         }
        
-        $('#tienda').prop('disabled', false);  
+        $('#tienda').prop('disabled', false);
+        $('#tipomovimientoentrada').prop('disabled', false);  
     });
 
 
