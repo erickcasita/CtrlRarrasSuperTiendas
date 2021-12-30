@@ -10,6 +10,9 @@ Checkout the project from Github to a local folder
 `git clone https://github.com/erickcasita/CtrlRarrasSuperTiendas.git`
 
 #### Install module dependencies
-Navigate to the folder where you checked out the project to in your console. Run `npm install`.
+Navigate to the folder where you checked out the project to in your console. 
+
+Run `npm install`.
+
 ## Running
 Run `npm run dev` and go to localhost: 4000   
