@@ -373,6 +373,7 @@ router.post('/newreportstocks',isLoggedIn, async (req, res) => {
     const tiendaname = await pool.query('SELECT nombretienda FROM tiendas WHERE idtienda = ?',[tienda]);
     //Contando el total de envases llenos 
     const totalenvaseslleno = await pool.query('SELECT SUM(stock) FROM almacen INNER JOIN productos on almacen.idproducto = productos.idproducto WHERE idtienda=? AND productos.tipoenvase = ?',[tienda,'ENVASE LLENO']);
+    console.log(totalenvaseslleno);
     //Contando el total de envases vacios 
     const totalenvasesvacios = await pool.query('SELECT SUM(stock) FROM almacen INNER JOIN productos on almacen.idproducto = productos.idproducto WHERE idtienda=? AND productos.tipoenvase = ?',[tienda,'ENVASE VACIO']);
     //Contando el total de envases en general
@@ -401,11 +402,16 @@ router.post('/newreportstocks',isLoggedIn, async (req, res) => {
         totalenvaseslleno.forEach(element => {
             var fila = new Array();
             fila.push('');
-            fila.push('TOTAL ENVASES LLENOS: ' + element['SUM(stock)']);
-
+            if( element['SUM(stock)'] === null){
+                fila.push('TOTAL ENVASES LLENOS: 0');
+            }else{
+                fila.push('TOTAL ENVASES LLENOS: ' + element['SUM(stock)']);
+            }
+            
             bodyenvaseslleno.push(fila);
 
         });
+       
         //LLenando los arreglos, envasesvacios y envasestotales con espacios en blanco
         for (let step = 0; step < 5; step++) {
             // Se ejecuta 5 veces, con valores del paso 0 al 4.
@@ -419,9 +425,14 @@ router.post('/newreportstocks',isLoggedIn, async (req, res) => {
         sql = await pool.query('SELECT almacen.idtienda, tiendas.nombretienda, almacen.idproducto, productos.descripcion, almacen.stock FROM almacen INNER JOIN tiendas ON almacen.idtienda = tiendas.idtienda INNER JOIN productos on almacen.idproducto = productos.idproducto WHERE almacen.idtienda = ? AND productos.tipoenvase = ?',[tienda,tipoenvase]);
         //LLenando el arreglo con articulos de envase vacios
         totalenvasesvacios.forEach(element => {
-        var fila = new Array();
-        fila.push('');
-        fila.push('TOTAL ENVASES VACIOS: '+element['SUM(stock)']);
+            var fila = new Array();
+            fila.push('');
+            if (element['SUM(stock)'] === null) {
+                fila.push('TOTAL ENVASES VACIOS: 0');
+            } else {
+                fila.push('TOTAL ENVASES VACIOS: ' + element['SUM(stock)']);
+            }
+        
     
         bodyenvasesvacio.push(fila);
     
@@ -446,18 +457,26 @@ router.post('/newreportstocks',isLoggedIn, async (req, res) => {
        sql = await pool.query('SELECT almacen.idtienda, tiendas.nombretienda, almacen.idproducto, productos.descripcion, almacen.stock FROM almacen INNER JOIN tiendas ON almacen.idtienda = tiendas.idtienda INNER JOIN productos on almacen.idproducto = productos.idproducto WHERE almacen.idtienda = ?',[tienda]);
        //LLenando el arreglo envases lleno
        totalenvaseslleno.forEach(element => {
-            var fila = new Array();
-            fila.push('');
-            fila.push('TOTAL ENVASES LLENOS: ' + element['SUM(stock)']);
+           var fila = new Array();
+           fila.push('');
+           if (element['SUM(stock)'] === null) {
+               fila.push('TOTAL ENVASES LLENOS: 0');
+           } else {
+               fila.push('TOTAL ENVASES LLENOS: ' + element['SUM(stock)']);
+           }
 
-            bodyenvaseslleno.push(fila);
+           bodyenvaseslleno.push(fila);
 
-        });
+       });
         //LLenando el arreglo envases vacios
         totalenvasesvacios.forEach(element => {
             var fila = new Array();
             fila.push('');
-            fila.push('TOTAL ENVASES VACIOS: '+element['SUM(stock)']);
+            if (element['SUM(stock)'] === null) {
+                fila.push('TOTAL ENVASES VACIOS: 0');
+            } else {
+                fila.push('TOTAL ENVASES VACIOS: ' + element['SUM(stock)']);
+            }
         
             bodyenvasesvacio.push(fila);
         
@@ -468,7 +487,12 @@ router.post('/newreportstocks',isLoggedIn, async (req, res) => {
         totalenvases.forEach(element => {
             var fila = new Array();
             fila.push('');
-            fila.push('TOTAL ALMACEN: ' + element['SUM(stock)']);
+            if (element['SUM(stock)'] === null) {
+                fila.push('TOTAL ALMACEN: 0');
+            } else {
+                fila.push('TOTAL ALMACEN: ' + element['SUM(stock)']);
+            }
+            
 
             bodytotalenvases.push(fila);
 
