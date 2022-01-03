@@ -203,18 +203,26 @@ router.post('/newstore', isLoggedIn, async (req, res) => {
     const { zona, nombretienda, calle, numero, colonia, localidad, municipio } = req.body;
 
     //Obteniendo los datos para el idtiendas
-    const totaltiendas = await pool.query('SELECT COUNT(*) as totaltiendas FROM tiendas');
-    let total, id
+    const totaltiendas = await pool.query('SELECT idtienda FROM tiendas ORDER BY LENGTH(idtienda) DESC, idtienda DESC LIMIT 1;');
+    let total, id,tmp
     totaltiendas.forEach((row) => {
 
-        total = row.totaltiendas;
+        total = row.idtienda;
+        
 
     });
-    total = total + 1;
-    total = total.toString();
+    //Separando 
+    tmp = total.split('TD');
+    tmp = tmp[1];
+    
+    //Sumando un nuevo id
+    tmp = Number(tmp)+1;
+    //Convirtiendo en String
+    tmp = tmp.toString();
 
     //Tratando el id
-    id = "TD" + total;
+     id = "TD" + tmp;
+     console.log(id);
 
     //Insertando una nueva tienda
     const newstore = {
