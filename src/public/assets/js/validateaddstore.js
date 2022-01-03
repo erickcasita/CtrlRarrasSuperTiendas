@@ -32,8 +32,11 @@ $(document).ready(function(){
                 'Todos los datos son requeridos',
                 'info'
             )
-            return false;
+            return false;   
+        }else{
+            $("#idstore").prop( "disabled", false );
         }
+        
 
     });
 }); 
