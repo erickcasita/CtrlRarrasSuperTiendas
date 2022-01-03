@@ -106,20 +106,27 @@ router.post('/newuser',isLoggedIn, async (req, res) => {
 
 router.post('/newarticle',isLoggedIn, async (req, res) => {
     const { tipoarticulo,tipoenvase, descripcion } = req.body;
-
-    //Obteniendo los datos para el idarticulos
-    const totalarticulos = await pool.query('SELECT COUNT(*) as totalarticulos FROM productos');
-    let total, id
-    totalarticulos.forEach((row) => {
-
-        total = row.totalarticulos;
-
-    });
-    total = total + 1;
-    total = total.toString();
-
-    //Tratando el id
-    id = "PD" + total;
+     //Obteniendo los datos para el idtiendas
+     const totalproductos = await pool.query('SELECT idproducto FROM productos ORDER BY LENGTH(idproducto) DESC, idproducto DESC LIMIT 1;');
+     let total, id,tmp
+     totalproductos.forEach((row) => {
+ 
+         total = row.idproducto;
+         
+ 
+     });
+     //Separando 
+     tmp = total.split('PD');
+     tmp = tmp[1];
+     
+     //Sumando un nuevo id
+     tmp = Number(tmp)+1;
+     //Convirtiendo en String
+     tmp = tmp.toString();
+ 
+     //Tratando el id
+      id = "PD" + tmp;
+  
     //Insertando un nuevo artículo
     const newarticle = {
         idproducto: id,
@@ -222,7 +229,7 @@ router.post('/newstore', isLoggedIn, async (req, res) => {
 
     //Tratando el id
      id = "TD" + tmp;
-     console.log(id);
+     
 
     //Insertando una nueva tienda
     const newstore = {
