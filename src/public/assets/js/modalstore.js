@@ -20,7 +20,7 @@ $(document).ready(function() {
        $("#coloniaeditar").val(colonia);
        $("#localidadeditar").val(localidad);
        $("#municipioeditar").val(municipio);
-     
+       $("#idstore").prop( "disabled", true );
        $('#editstoreModal').modal('show');	
     });
     $(document).on("click", ".deleteItem", function(){
