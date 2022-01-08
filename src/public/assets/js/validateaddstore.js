@@ -1,5 +1,61 @@
 $(document).ready(function(){
     //código para validar si hay un registro vacio.
+    
+    //Convirtiendo a mayusculas
+    $("#nombretienda").on("keypress", function () {
+        $input = $(this);
+        setTimeout(function () {
+          $input.val($input.val().toUpperCase());
+        }, 50);
+      });
+    $("#calle").on("keypress", function () {
+        $input = $(this);
+        setTimeout(function () {
+          $input.val($input.val().toUpperCase());
+        }, 50);
+      });
+      $("#numero").on("keypress", function () {
+        $input = $(this);
+        setTimeout(function () {
+          $input.val($input.val().toUpperCase());
+        }, 50);
+        
+      });
+      $("#colonia").on("keypress", function () {
+        $input = $(this);
+        setTimeout(function () {
+          $input.val($input.val().toUpperCase());
+        }, 50);
+        
+      });
+
+      $("#calleeditar").on("keypress", function () {
+        $input = $(this);
+        setTimeout(function () {
+          $input.val($input.val().toUpperCase());
+        }, 50);
+      });
+      $("#numeroeditar").on("keypress", function () {
+        $input = $(this);
+        setTimeout(function () {
+          $input.val($input.val().toUpperCase());
+        }, 50);
+        
+      });
+      $("#coloniaeditar").on("keypress", function () {
+        $input = $(this);
+        setTimeout(function () {
+          $input.val($input.val().toUpperCase());
+        }, 50);
+        
+      });
+      $("#nombretiendaeditar").on("keypress", function () {
+        $input = $(this);
+        setTimeout(function () {
+          $input.val($input.val().toUpperCase());
+        }, 50);
+        
+      });
 
     $("#agregar").click(function(){
         
@@ -17,8 +73,10 @@ $(document).ready(function(){
             return false;
         }
 
-    });
+       
 
+    });
+    
     $("#editar").click(function(){
         
         let nombretienda = $('#nombretiendaeditar').val();

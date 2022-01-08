@@ -1,5 +1,75 @@
 $(document).ready(function(){
 
+    $("#nombre").on("keypress", function () {
+        $input = $(this);
+        setTimeout(function () {
+          $input.val($input.val().toUpperCase());
+        }, 50);
+        
+      });
+      $("#apellidop").on("keypress", function () {
+        $input = $(this);
+        setTimeout(function () {
+          $input.val($input.val().toUpperCase());
+        }, 50);
+        
+      });
+      $("#apellidom").on("keypress", function () {
+        $input = $(this);
+        setTimeout(function () {
+          $input.val($input.val().toUpperCase());
+        }, 50);
+        
+      });
+      $("#nusuario").on("keypress", function () {
+        $input = $(this);
+        setTimeout(function () {
+          $input.val($input.val().toUpperCase());
+        }, 50);
+        
+      });
+      $("#password").on("keypress", function () {
+        $input = $(this);
+        setTimeout(function () {
+          $input.val($input.val().toUpperCase());
+        }, 50);
+        
+      });
+      $("#nombreeditar").on("keypress", function () {
+        $input = $(this);
+        setTimeout(function () {
+          $input.val($input.val().toUpperCase());
+        }, 50);
+        
+      });
+      $("#apellidopeditar").on("keypress", function () {
+        $input = $(this);
+        setTimeout(function () {
+          $input.val($input.val().toUpperCase());
+        }, 50);
+        
+      });
+      $("#apellidomeditar").on("keypress", function () {
+        $input = $(this);
+        setTimeout(function () {
+          $input.val($input.val().toUpperCase());
+        }, 50);
+        
+      });
+      $("#nusuarioeditar").on("keypress", function () {
+        $input = $(this);
+        setTimeout(function () {
+          $input.val($input.val().toUpperCase());
+        }, 50);
+        
+      });
+      $("#passwordeditar").on("keypress", function () {
+        $input = $(this);
+        setTimeout(function () {
+          $input.val($input.val().toUpperCase());
+        }, 50);
+        
+      });
     $("#agregar").click(function(){
         let nombre = $('#nombre').val();
         let apellidop = $('#apellidop').val();
@@ -10,7 +80,7 @@ $(document).ready(function(){
         if(nombre === '' || apellidop === '' || apellidom === '' || nusuario === '' || password === ''){
             Swal.fire(
                 'Atención!',
-                'No hay ningún artículo en la lista',
+                'Todos los campos son requeridos',
                 'info'
             )
             return false;
@@ -26,7 +96,7 @@ $(document).ready(function(){
         if(nombreeditar === '' || apellidopeditar === '' || apellidomeditar === '' || nusuarioeditar === '' || passwordeditar === ''){
             Swal.fire(
                 'Atención!',
-                'No hay ningún artículo en la lista',
+                'Todos los campos son requeridos',
                 'info'
             )
             return false;
