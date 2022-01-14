@@ -388,7 +388,6 @@ router.post('/newreportstocks',isLoggedIn, async (req, res) => {
     const tiendaname = await pool.query('SELECT nombretienda FROM tiendas WHERE idtienda = ?',[tienda]);
     //Contando el total de envases llenos 
     const totalenvaseslleno = await pool.query('SELECT SUM(stock) FROM almacen INNER JOIN productos on almacen.idproducto = productos.idproducto WHERE idtienda=? AND productos.tipoenvase = ?',[tienda,'ENVASE LLENO']);
-    console.log(totalenvaseslleno);
     //Contando el total de envases vacios 
     const totalenvasesvacios = await pool.query('SELECT SUM(stock) FROM almacen INNER JOIN productos on almacen.idproducto = productos.idproducto WHERE idtienda=? AND productos.tipoenvase = ?',[tienda,'ENVASE VACIO']);
     //Contando el total de envases en general
