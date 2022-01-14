@@ -24,6 +24,7 @@
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
+    "@types/express-handlebars": "^6.0.0",
     "nodemon": "^2.0.15"
   }
 }
